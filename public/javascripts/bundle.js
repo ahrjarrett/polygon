@@ -10187,7 +10187,7 @@ module.exports = function(map, poly, el){
   logHomes.addEventListener('click', function(e){
 
     e.preventDefault()
-    var parentNode = document.getElementById('check-map-log')
+    var parentNode = document.getElementById('coordinates-log')
 
     getHomes(homes)
 
@@ -10214,23 +10214,53 @@ var R = require('ramda')
 var homes = require('../../db/data.json')
 
 module.exports = function(map, poly, el){
-  this.currentPath = path
-  var logPath = document.getElementById(el)
-  logPath.addEventListener('click', function(e){
+  var polygon = poly
+  var markers = []
+  var results = []
+  var minPrice = document.getElementById('min-price').value
+  var maxPrice = document.getElementById('max-price').value
 
+  var getHomes = R.map(function(home){
+    var datum = new google.maps.LatLng(home.geometry.location)
+    if(home.geometry.price >= minPrice && home.geometry.price <= maxPrice){
+      if(google.maps.geometry.poly.containsLocation(datum, polygon)) {
+        results.push(home)
+      }
+    }
+  })
+
+  var setMapOnAll = function(map){
+    for(var i = 0; i < markers.length; i++){
+      markers[i].setMap(map)
+    }
+  }
+  var clearMarkers = function(){
+    setMapOnAll(null)
+  }
+  var deleteMarkers = function(){
+    clearMarkers()
+    markers = []
+  }
+
+  var logHomes = document.getElementById(el)
+  logHomes.addEventListener('click', function(e){
     e.preventDefault()
-    var parentNode = document.getElementById('path-log')
+    deleteMarkers()
+    getHomes(homes)
+
+    var parentNode = document.getElementById('address-log')
     while (parentNode.firstChild) {
       parentNode.removeChild(parentNode.firstChild);
     }
 
-    currentPath.forEach(function(coordinate, idx){
-      var logTemplate = `{lat: ${coordinate.lat()}, lng: ${coordinate.lng()}},`
+    results.forEach(function(home, idx){
+      var logTemplate = `${home.formatted_address}`
       var node = document.createElement('LI')
       var textnode = document.createTextNode(logTemplate)
       node.appendChild(textnode)
       parentNode.appendChild(node)
     })
+    console.log(results)
   })
 }
 
@@ -10290,10 +10320,11 @@ module.exports = function(path, el){
       if(currentPath.length < 6) currentPath.push(e.latLng)
     })
 
-    undoPin('undo-point')
     logPath(currentPath, 'log-path')
-    logHomes(map, polygon, 'log-homes')
+    undoPin('undo-point')
     showHomes(map, polygon, markers, results, 'show-homes')
+    logHomes(map, polygon, 'log-homes')
+    logCoordinates(map, polygon, 'log-coordinates')
 
   }
   window.onload = initMap

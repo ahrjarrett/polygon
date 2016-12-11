@@ -3,14 +3,15 @@ extends layout
 block content
   #content-wrapper
     #map-log
+      .address-log
+        strong Homes in Polygon & Price Range:
+        ul#address-log.logger
+      .coordinates-log
+        strong Home Coordinates:
+        ul#coordinates-log.logger
       .path-log
         strong Polygon Coordinates:
-        ul#path-log.path-log
-      .check-map-log
-        strong Homes inside Polygon, w/in price range:
-        ul#check-map-log.check-map-log
-      .home-coordinates
-        strong Home Coordinates:
+        ul#path-log.logger
     #map-canvas.map-canvas
     #main-interface.main-interface
       script.
@@ -18,10 +19,10 @@ block content
         var maxPriceOutput = '#max-price-output'
         function outputUpdate(price, id) { document.querySelector(id).value = `$${price}`}
       button#show-homes.pure-button.pure-button-primary Show Homes Inside Polygon
-      button#undo-point.undo-point.pure-button.button-secondary Undo Last Pin-Drop
-      button#log-homes.log-homespure-button.pure-button-primary Log Home Addresses
-      button#log-coordinates.log-coordinates.pure-button.button-secondary Log Home Coordinates
-      button#log-path.log-path.pure-button.pure-button-primary Log Polygon Coordinates
+      button#log-homes.log-homes.pure-button.button-secondary Log Home Addresses
+      button#log-coordinates.log-coordinates.pure-button.pure-button-primary Log Home Coordinates
+      button#log-path.log-path.pure-button.button-secondary Log Polygon Coordinates
+      button#undo-point.undo-point.pure-button.pure-button-primary Undo Last Pin-Drop
       button#see-json.see-json(onclick='location.href="/data"').pure-button.button-secondary See JSON “Database”
       .price-range
         label(for='min-price') Min Price
@@ -31,4 +32,4 @@ block content
         label(for='max-price') Max Price
         input.price-filter(id='max-price' type='range' min='0' max='1500000' step='100' value='1500000' oninput='outputUpdate(value, maxPriceOutput)')
         .price-output
-          output.price(for='max-price' id='max-price-output') $100000
+          output.price(for='max-price' id='max-price-output') $1500000

@@ -29,10 +29,11 @@
       if(currentPath.length < 6) currentPath.push(e.latLng)
     })
 
-    undoPin('undo-point')
     logPath(currentPath, 'log-path')
-    logHomes(map, polygon, 'log-homes')
+    undoPin('undo-point')
     showHomes(map, polygon, markers, results, 'show-homes')
+    logHomes(map, polygon, 'log-homes')
+    logCoordinates(map, polygon, 'log-coordinates')
 
   }
   window.onload = initMap

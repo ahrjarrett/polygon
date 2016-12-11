@@ -41,7 +41,7 @@ module.exports = function(map, poly, el){
   logHomes.addEventListener('click', function(e){
 
     e.preventDefault()
-    var parentNode = document.getElementById('check-map-log')
+    var parentNode = document.getElementById('coordinates-log')
 
     getHomes(homes)
 
