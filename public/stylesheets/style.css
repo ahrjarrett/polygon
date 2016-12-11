@@ -1,0 +1,86 @@
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+  color: #00B7FF;
+}
+ul {
+  padding: 20px;
+}
+
+li {
+  font-size: 11px;
+}
+#content-wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+#map-log {
+  min-width: 20%;
+  max-width: 20%;
+  padding: 10px;
+  overflow: scroll;
+}
+
+#map-canvas {
+  height: 100%;
+  width: 75%;
+}
+
+#main-interface {
+  display: flex;
+  flex-direction: column;
+  min-width: 20%;
+  max-width: 20%;
+}
+
+.price-filter {
+  width: 75%;
+  text-align: center;
+  margin: 0 12.5%;
+}
+
+.price-output {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 7.5px;
+  padding-bottom: 7.5px;
+  min-width: 100%;
+  text-align: center;
+  font-size: 18px;
+}
+
+.price-range {
+  padding-top: 10px;
+  text-align: center;
+}
+
+.price-range input {
+  width: 80%;
+}
+
+.price-range label {
+  font-size: 18px;
+  margin: 0 auto;
+  text-align: center;
+  /*margin-left: 100px;*/
+}
+
+.button-secondary {
+  background: rgb(66, 184, 221);
+  color: white;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+#min-interface button {
+  min-height: 30px !important;
+}
+
+
