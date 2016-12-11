@@ -10154,6 +10154,15 @@ module.exports = function(map, poly, el){
   var minPrice = document.getElementById('min-price').value
   var maxPrice = document.getElementById('max-price').value
 
+  var getHomes = R.map(function(home){
+    var datum = new google.maps.LatLng(home.geometry.location)
+    if(home.geometry.price >= minPrice && home.geometry.price <= maxPrice){
+      if(google.maps.geometry.poly.containsLocation(datum, polygon)) {
+          results.push(home)
+      }
+    }
+  })
+
   var setMapOnAll = function(mapToSet){
     for(var i = 0; i < markers.length; i++){
       markers[i].setMap(mapToSet)
@@ -10166,43 +10175,25 @@ module.exports = function(map, poly, el){
     clearMarkers()
     markers = []
   }
-  var addMarker = function(location){
-    var marker = new google.maps.Marker({
-      position: location,
-      map: map
-    })
-  }
 
-  var getHomes = R.map(function(home){
-    var datum = new google.maps.LatLng(home)
-    if(home.price >= minPrice && home.price <= maxPrice){
-      if(google.maps.geometry.poly.containsLocation(datum, polygon)) {
-          results.push(home)
-      }
-    }
-  })
-
-
-  var logHomes = document.getElementById(el)
-  logHomes.addEventListener('click', function(e){
+  var logCoordinates = document.getElementById(el)
+  logCoordinates.addEventListener('click', function(e){
 
     e.preventDefault()
     var parentNode = document.getElementById('coordinates-log')
 
     getHomes(homes)
 
-    //break while loop and forEach into own module
     while (parentNode.firstChild) {
       parentNode.removeChild(parentNode.firstChild);
     }
     deleteMarkers()
     results.forEach(function(home, idx){
-      var checkMapTemplate = `${home.lat} ${home.lng}`
+      var logTemplate = `${home.geometry.location.lat} ${home.geometry.location.lng}`
       var node = document.createElement('LI')
-      var textnode = document.createTextNode(checkMapTemplate)
+      var textnode = document.createTextNode(logTemplate)
       node.appendChild(textnode)
       parentNode.appendChild(node)
-      markers.push(new google.maps.Marker({ position: home }))
     })
 
 
@@ -10250,7 +10241,7 @@ module.exports = function(map, poly, el){
 
     var parentNode = document.getElementById('address-log')
     while (parentNode.firstChild) {
-      parentNode.removeChild(parentNode.firstChild);
+      parentNode.removeChild(parentNode.firstChild)
     }
 
     results.forEach(function(home, idx){
@@ -10260,7 +10251,6 @@ module.exports = function(map, poly, el){
       node.appendChild(textnode)
       parentNode.appendChild(node)
     })
-    console.log(results)
   })
 }
 
@@ -10270,16 +10260,16 @@ module.exports = function(map, poly, el){
 module.exports = function(path, el){
   this.currentPath = path
   var logPath = document.getElementById(el)
-  logPath.addEventListener('click', function(e){
 
+  logPath.addEventListener('click', function(e){
     e.preventDefault()
     var parentNode = document.getElementById('path-log')
     while (parentNode.firstChild) {
-      parentNode.removeChild(parentNode.firstChild);
+      parentNode.removeChild(parentNode.firstChild)
     }
 
     currentPath.forEach(function(coordinate, idx){
-      var logTemplate = `{lat: ${coordinate.lat()}, lng: ${coordinate.lng()}},`
+      var logTemplate = `${coordinate.lat()} ${coordinate.lng()}`
       var node = document.createElement('LI')
       var textnode = document.createTextNode(logTemplate)
       node.appendChild(textnode)
@@ -10320,11 +10310,11 @@ module.exports = function(path, el){
       if(currentPath.length < 6) currentPath.push(e.latLng)
     })
 
-    logPath(currentPath, 'log-path')
-    undoPin('undo-point')
     showHomes(map, polygon, markers, results, 'show-homes')
     logHomes(map, polygon, 'log-homes')
     logCoordinates(map, polygon, 'log-coordinates')
+    logPath(currentPath, 'log-path')
+    undoPin('undo-point')
 
   }
   window.onload = initMap
@@ -10379,11 +10369,11 @@ module.exports = function(map, polygon, markers, results, el){
     }
 
     var getHomes = R.map(function(home){
-      var datum = new google.maps.LatLng(home)
-      if(home.price >= minPrice && home.price <= maxPrice){
+      var datum = new google.maps.LatLng(home.geometry.location)
+      if(home.geometry.price >= minPrice && home.geometry.price <= maxPrice){
         if(google.maps.geometry.poly.containsLocation(datum, polygon)) {
             results.push(home)
-            markers.push(new google.maps.Marker({ position: home }))
+            markers.push(new google.maps.Marker({ position: home.geometry.location }))
         }
       }
     })

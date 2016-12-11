@@ -38,7 +38,7 @@ module.exports = function(map, poly, el){
 
     var parentNode = document.getElementById('address-log')
     while (parentNode.firstChild) {
-      parentNode.removeChild(parentNode.firstChild);
+      parentNode.removeChild(parentNode.firstChild)
     }
 
     results.forEach(function(home, idx){
@@ -48,7 +48,6 @@ module.exports = function(map, poly, el){
       node.appendChild(textnode)
       parentNode.appendChild(node)
     })
-    console.log(results)
   })
 }
 

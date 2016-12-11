@@ -28,11 +28,11 @@ module.exports = function(map, polygon, markers, results, el){
     }
 
     var getHomes = R.map(function(home){
-      var datum = new google.maps.LatLng(home)
-      if(home.price >= minPrice && home.price <= maxPrice){
+      var datum = new google.maps.LatLng(home.geometry.location)
+      if(home.geometry.price >= minPrice && home.geometry.price <= maxPrice){
         if(google.maps.geometry.poly.containsLocation(datum, polygon)) {
             results.push(home)
-            markers.push(new google.maps.Marker({ position: home }))
+            markers.push(new google.maps.Marker({ position: home.geometry.location }))
         }
       }
     })
