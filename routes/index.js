@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Google Maps Polygon' });
-});
+  res.render('index', { title: 'Google Maps Polygon' })
+})
 
-module.exports = router;
+// ADD FUNCTIONALITY TO SAVE POLYGON COORDINATES (R.lensProp?)
+
+module.exports = router
+

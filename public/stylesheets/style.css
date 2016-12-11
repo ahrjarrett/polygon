@@ -12,9 +12,11 @@ a {
 ul {
   padding-left: 20px;
 }
-
 li {
   font-size: 11px;
+}
+#main-interface button {
+  font-size: 18px;
 }
 #content-wrapper {
   height: 100%;

@@ -43,7 +43,7 @@ module.exports = function(map, poly, el){
     }
     deleteMarkers()
     results.forEach(function(home, idx){
-      var logTemplate = `${home.geometry.location.lat} ${home.geometry.location.lng}`
+      var logTemplate = `{ ${home.geometry.location.lat}, ${home.geometry.location.lng} }`
       var node = document.createElement('LI')
       var textnode = document.createTextNode(logTemplate)
       node.appendChild(textnode)
