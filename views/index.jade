@@ -33,3 +33,8 @@ block content
         input.price-filter(id='max-price' type='range' min='0' max='1500000' step='100' value='1500000' oninput='outputUpdate(value, maxPriceOutput)')
         .price-output
           output.price(for='max-price' id='max-price-output') $1500000
+      form#add-data(name='add-data' action='/save-data' method='POST')
+        label(for='add-data') Add New Home to Database:
+        input.add-input.add-street(type='text' placeholder='123 Main St')
+        input.add-input.add-price(type='text' placeholder='$1,000,000')
+        input.submit-data.pure-button.pure-button-primary(type='submit' value='Add Home')

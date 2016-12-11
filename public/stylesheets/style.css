@@ -51,15 +51,12 @@ li {
 
 .price-output {
   border-bottom: 1px solid #ccc;
-  margin-bottom: 7.5px;
-  padding-bottom: 7.5px;
   min-width: 100%;
   text-align: center;
   font-size: 18px;
 }
 
 .price-range {
-  padding-top: 10px;
   text-align: center;
 }
 
@@ -84,4 +81,24 @@ li {
   min-height: 30px !important;
 }
 
+form#add-data {
+  background-color: #ddd;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 20px;
+}
 
+#add-data label {
+  font-size: 18px;
+  margin: 0 auto;
+}
+.submit-data, .add-input {
+  min-width: 100%;
+  font-size: 18px;
+}
+.add-input{
+  padding: 5px;
+}
+.add-street {
+  margin-top: 7.5px;
+}

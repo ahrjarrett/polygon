@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 var HomeSchema = new Schema({
-  id: ObjectId,
+  id: Number,
   formatted_address: String,
   price: Number,
   location: {
@@ -11,4 +11,4 @@ var HomeSchema = new Schema({
   }
 })
 
-module.exports = mongoose.model('Home', HomeSchema)
+module.exports = mongoose.model('Home', HomeSchema, 'homes')
