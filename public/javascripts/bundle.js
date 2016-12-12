@@ -9172,7 +9172,6 @@ module.exports = function(el, target){
       var node = document.createElement('LI')
       var nodeInner = document.createElement('A')
       var textnode = document.createTextNode(polyTemplate)
-      console.log(polygon.paths)
 
       node.appendChild(nodeInner)
       nodeInner.appendChild(textnode)
