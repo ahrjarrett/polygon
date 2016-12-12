@@ -8,13 +8,13 @@ block content
         button#clear-logger.pure-button(onclick='clearLog()') Clear Log
         //- button#clear-map.pure-button(onclick='clearMap()') Clear Map
       .address-log
-        strong Homes in Polygon & Price Range:
+        strong Homes inside Polygon:
         ul#address-log.logger
       .coordinates-log
         strong Home Coordinates:
         ul#coordinates-log.logger
       .path-log
-        strong Polygon Coordinates:
+        strong Polygon Path Coordinates:
         ul#path-log.logger
       .poly-log
         strong Saved Polygons:
@@ -31,7 +31,7 @@ block content
       button#log-path.log-path.pure-button.button-secondary Log Polygon Coordinates
       button#show-poly.show-poly.pure-button.pure-button-primary Show List of Polygons
       button#undo-point.undo-point.pure-button.button-secondary Undo Last Pin-Drop
-      button#see-json.see-json(onclick='location.href="/homes"').pure-button.pure-button-primary Inspect Database
+      //- button#see-json.see-json(onclick='location.href="/homes"').pure-button.pure-button-primary Inspect Database
       .price-range
         label(for='min-price') Min Price
         input.price-filter(id='min-price' type='range' min='0' max='1500000' step='100' value='0' oninput='outputUpdate(value, minPriceOutput)')

@@ -13,8 +13,9 @@
     var logCoordinates = require('./logCoordinates')
     var logHomes = require('./logHomes')
     var showHomes = require('./showHomes')
-    var savePoly = require('./savePoly')
+    var saveHomes = require('./saveHomes')
     var showPoly = require('./showPoly')
+    var savePoly = require('./savePoly')
 
     var mapDiv = 'map-canvas'
     var mapOpts = opts.mapOpts
@@ -40,6 +41,7 @@
     // ORDER is important here b/c we need to get the new path just before saving
     var newPath = polygon.getPath()
     savePoly(map, newPath, 'save-poly')
+    saveHomes(map, 'save-home')
 
   }
   window.onload = initMap

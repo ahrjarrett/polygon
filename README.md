@@ -18,12 +18,16 @@ Note that the Polygon is *draggable*; as of now, 'Log Path' and 'Check Against M
 - ~~Load home data from database instead of data.json~~
 - ~~Turn each coordinate and address into dynamic link to its raw data~~
 - ~~Add price filter~~
+- ~~Bug: Log Addresses & Log Coordinates append, without removing children~~
+- asynchronous req from geocode returns an array that's out of order, causes exceptions
+- POST request: /save-home *make it work at all*
+- POST request: /save-poly *make it work again*
+- figure out how to trim, or otherwise force JSON input to work (or just rethink the whole thing)
+- repopulate #show-poly with saved polygons for reference later
+- Bug: Clear log doesn't empty results array, which means it keeps accumulating state
 - Refactor filtering logic for easier reuse later
 - fix ajax sync problem (open console for e.message)
-- POST request: /save-home
-- POST request: /save-poly
-- figure out how eventListeners work when layered on Polygons (no rightclick event?)
-- add one more form to right interface (toggle showPolygon(s))?
 - Hone Polygram and Home schema, add error handling
 - Save Polygrams in db for reference later
-- Bug: Log Addresses & Log Coordinates append, without removing children
+- figure out how eventListeners work when layered on Polygons (no rightclick event?)
+- add one more form to right interface (toggle showPolygon(s))?

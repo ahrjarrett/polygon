@@ -9005,8 +9005,9 @@ module.exports = function(map, path, el){
     var logCoordinates = require('./logCoordinates')
     var logHomes = require('./logHomes')
     var showHomes = require('./showHomes')
-    var savePoly = require('./savePoly')
+    var saveHomes = require('./saveHomes')
     var showPoly = require('./showPoly')
+    var savePoly = require('./savePoly')
 
     var mapDiv = 'map-canvas'
     var mapOpts = opts.mapOpts
@@ -9032,13 +9033,14 @@ module.exports = function(map, path, el){
     // ORDER is important here b/c we need to get the new path just before saving
     var newPath = polygon.getPath()
     savePoly(map, newPath, 'save-poly')
+    saveHomes(map, 'save-home')
 
   }
   window.onload = initMap
 
 }())
 
-},{"./logCoordinates":3,"./logHomes":4,"./logPath":5,"./opts":7,"./savePoly":8,"./showHomes":9,"./showPoly":10,"./undoPin":11,"ramda":1}],7:[function(require,module,exports){
+},{"./logCoordinates":3,"./logHomes":4,"./logPath":5,"./opts":7,"./saveHomes":8,"./savePoly":9,"./showHomes":10,"./showPoly":11,"./undoPin":12,"ramda":1}],7:[function(require,module,exports){
 var opts = {
   mapOpts: {
     center: { lat: 39.7392, lng: -104.9903 },
@@ -9056,6 +9058,15 @@ var opts = {
 module.exports = opts
 
 },{}],8:[function(require,module,exports){
+module.exports = function(map, el) {
+  var elem = document.getElementById(el)
+  elem.addEventListener('click', function(e){
+    //e.preventDefault()
+
+  })
+}
+
+},{}],9:[function(require,module,exports){
 module.exports = function(map, paths, el){
   var thisPath = paths
   var el = document.getElementById(el)
@@ -9075,7 +9086,7 @@ module.exports = function(map, paths, el){
   })
 }
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 var R = require('ramda')
 var getRemote = require('./ajaxRequest')
 var homes = getRemote('homes')
@@ -9124,7 +9135,7 @@ module.exports = function(map, polygon, markers, results, el){
 
 }
 
-},{"./ajaxRequest":2,"ramda":1}],10:[function(require,module,exports){
+},{"./ajaxRequest":2,"ramda":1}],11:[function(require,module,exports){
 var getRemote = require('./ajaxRequest')
 //var Polygon = require('../../models/polygon')
 var polygons = getRemote('polygons')
@@ -9168,7 +9179,7 @@ module.exports = function(el, target){
 
 
 
-},{"./ajaxRequest":2}],11:[function(require,module,exports){
+},{"./ajaxRequest":2}],12:[function(require,module,exports){
 module.exports = function(el){
   var undoPin = document.getElementById(el)
   undoPin.addEventListener('click', function(e){
