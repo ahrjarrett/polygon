@@ -1,7 +1,6 @@
 (function(){
 
   var R = require('ramda')
-  //var homes = require('../../db/data.json')
 
   var map
   var markers = []
@@ -18,6 +17,15 @@
 
     var mapDiv = 'map-canvas'
     var mapOpts = opts.mapOpts
+
+    var newPath = [
+      { lat: 39.98869501604662, lng: -105.02543449401855},
+      { lat: 39.82013946676259, lng: -105.10233879089355},
+      { lat: 39.7631584037253, lng: -104.55851554870605},
+      { lat: 39.84755795735592, lng: -104.6546459197998},
+      { lat: 40.01289077952615, lng: -104.62306022644043},
+      { lat: 40.029717557833266, lng: -104.90870475769043}
+    ]
 
     map = new google.maps.Map(document.getElementById(mapDiv), mapOpts)
 

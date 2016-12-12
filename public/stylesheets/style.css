@@ -70,7 +70,9 @@ li {
   text-align: center;
   /*margin-left: 100px;*/
 }
-
+.pure-button{
+  border-radius: 0;
+}
 .button-success, .button-secondary {
   color: white;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
@@ -104,7 +106,7 @@ label {
   font-size: 18px;
 }
 .add-input{
-  padding: 5px;
+  padding: 8px 0 8px 12px;
   width: 250px;
 }
 .submit-data{
@@ -112,4 +114,18 @@ label {
 }
 .add-street, .add-name {
   margin-top: 7.5px;
+}
+.logger-header {
+  font-size: 24px;
+  text-decoration: underline;
+  width: 70%;
+  padding-left: 5px;
+}
+.log-column {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 25px;
+}
+button#clear-logger, button#clear-map {
+  padding: 0 8px;
 }

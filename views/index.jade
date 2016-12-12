@@ -3,6 +3,10 @@ extends layout
 block content
   #content-wrapper
     #map-log
+      .log-column
+        .logger-header LOGGER
+        button#clear-logger.pure-button(onclick='clearLog()') Clear Log
+        //- button#clear-map.pure-button(onclick='clearMap()') Clear Map
       .address-log
         strong Homes in Polygon & Price Range:
         ul#address-log.logger

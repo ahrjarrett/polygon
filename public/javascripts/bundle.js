@@ -38823,14 +38823,6 @@ module.exports = function(map, path, el){
   this.currentPath = path
   var logPath = document.getElementById(el)
 
-
-
-  //path: new google.maps.MVCArray(),
-  //strokeColor: '#1cb841',
-  //fillColor: '#1cb841',
-  //draggable: true,
-  //opacity: .25
-
   logPath.addEventListener('click', function(e){
     e.preventDefault()
     var parentNode = document.getElementById('path-log')
@@ -38852,7 +38844,6 @@ module.exports = function(map, path, el){
 (function(){
 
   var R = require('ramda')
-  //var homes = require('../../db/data.json')
 
   var map
   var markers = []
@@ -38870,6 +38861,15 @@ module.exports = function(map, path, el){
     var mapDiv = 'map-canvas'
     var mapOpts = opts.mapOpts
 
+    var newPath = [
+      { lat: 39.98869501604662, lng: -105.02543449401855},
+      { lat: 39.82013946676259, lng: -105.10233879089355},
+      { lat: 39.7631584037253, lng: -104.55851554870605},
+      { lat: 39.84755795735592, lng: -104.6546459197998},
+      { lat: 40.01289077952615, lng: -104.62306022644043},
+      { lat: 40.029717557833266, lng: -104.90870475769043}
+    ]
+
     map = new google.maps.Map(document.getElementById(mapDiv), mapOpts)
 
     var polyOpts = opts.polyOpts
@@ -38880,16 +38880,6 @@ module.exports = function(map, path, el){
     google.maps.event.addListener(map, 'click', function(e) {
       if(currentPath.length < 6) currentPath.push(e.latLng)
     })
-
-    var newPath = [
-      { lat: 39.98869501604662, lng: -105.02543449401855},
-      { lat: 39.82013946676259, lng: -105.10233879089355},
-      { lat: 39.7631584037253, lng: -104.55851554870605},
-      { lat: 39.84755795735592, lng: -104.6546459197998},
-      { lat: 40.01289077952615, lng: -104.62306022644043},
-      { lat: 40.029717557833266, lng: -104.90870475769043}
-    ]
-
 
     showHomes(map, polygon, markers, results, 'show-homes')
     logHomes(map, polygon, 'log-homes')
@@ -38922,16 +38912,17 @@ module.exports = opts
 
 },{}],140:[function(require,module,exports){
 module.exports = function(map, path, el){
+  var currentPath = path
   var el = document.getElementById(el)
   el.addEventListener('click', function(e){
     var newPoly = new google.maps.Polygon({
       path: currentPath,
-      strokeColor: '#dddddd',
-      fillColor: '#dddddd',
-      opacidty: .25
+      strokeColor: '#000',
+      fillColor: '#000',
+      opacity: .25
     })
 
-    console.log(newPoly)
+    console.log(newPoly.latLngs.b[0])
     newPoly.setMap(map)
 
   })
