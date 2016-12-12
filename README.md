@@ -5,7 +5,7 @@ Demo: [Polygon Demo](https://young-sands-13574.herokuapp.com/)
 ### Instructions:
 Click at least twice on the map to create a line, three times or more to create a polygon. On the right are operations you can perform, including a log of the coordinates of the line/polygon and a function that will check a JSON array full of coordinates and return which, if any, are contained inside the polygon and fall within the designated price range (click 'See JSON Data' to see all coordinates).
 
-*Note that the Polygon is draggable*; as of now, 'Log Path' and 'Check Against Map' will need to be run again in order to re-compute coordinates. Also note that there is an arbitrary limit on the number of pin-drops the polygon will accept (6).
+Note that the Polygon is *draggable*; as of now, 'Log Path' and 'Check Against Map' will need to be run again in order to re-compute coordinates. Also note that there is an arbitrary limit on the number of pin-drops the polygon will accept (6).
 
 ### Specs:
 * Create a map program where I can draw polygons in and around Denver
@@ -13,3 +13,17 @@ Click at least twice on the map to create a line, three times or more to create 
 * add some custom columns into the DB based on IF/Then statements or calculations
 * Ability to export the data
 * Future - have a front end interface hit the DB for reporting.
+
+### Todo:
+- ~~Load home data from database instead of data.json~~
+- ~~Turn each coordinate and address into dynamic link to its raw data~~
+- ~~Add price filter~~
+- Refactor filtering logic for easier reuse later
+- fix ajax sync problem (open console for e.message)
+- POST request: /save-home
+- POST request: /save-poly
+- figure out how eventListeners work when layered on Polygons (no rightclick event?)
+- add one more form to right interface (toggle showPolygon(s))?
+- Hone Polygram and Home schema, add error handling
+- Save Polygrams in db for reference later
+- Bug: Log Addresses & Log Coordinates append, without removing children
