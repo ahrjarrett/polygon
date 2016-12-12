@@ -18,7 +18,7 @@ module.exports = function(el, target){
       parentNode.removeChild(parentNode.firstChild)
     }
 
-    // use map here
+    // use .map here
     polygons.forEach(function(polygon){
       var polyTemplate = `Polygon: ${polygon.name}`
       var node = document.createElement('LI')

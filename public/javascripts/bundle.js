@@ -8982,9 +8982,9 @@ module.exports = function(map, path, el){
 
     currentPath.forEach(function(path, idx) {
       if (idx === currentPath.length - 1) {
-        var logTemplate = `{ lat: ${path.lat()}, lng: ${path.lng() } }`
+        var logTemplate = `{ "lat": ${path.lat()}, "lng": ${path.lng() } }`
       } else {
-        var logTemplate = `{ lat: ${path.lat()}, lng: ${path.lng()} },`
+        var logTemplate = `{ "lat": ${path.lat()}, "lng": ${path.lng()} },`
       }
       var node = document.createElement('li')
       var textnode = document.createTextNode(logTemplate)
@@ -9008,6 +9008,7 @@ module.exports = function(map, path, el){
     var logCoordinates = require('./logCoordinates')
     var logHomes = require('./logHomes')
     var opts = require('./opts')
+    var renderPolygon = require('./renderPolygon')
     var saveHomes = require('./saveHomes')
     var showHomes = require('./showHomes')
     var savePoly = require('./savePoly')
@@ -9030,6 +9031,7 @@ module.exports = function(map, path, el){
     })
 
     // execute side-effects
+    //renderPolygon(map)
     showHomes(map, polygon, markers, results, 'show-homes')
     showPoly('show-poly', 'poly-log')
     logHomes(map, polygon, 'log-homes')
@@ -9047,7 +9049,7 @@ module.exports = function(map, path, el){
 
 }())
 
-},{"./logCoordinates":3,"./logHomes":4,"./logPath":5,"./opts":7,"./saveHomes":8,"./savePoly":9,"./showHomes":10,"./showPoly":11,"./undoPin":12,"ramda":1}],7:[function(require,module,exports){
+},{"./logCoordinates":3,"./logHomes":4,"./logPath":5,"./opts":7,"./renderPolygon":8,"./saveHomes":9,"./savePoly":10,"./showHomes":11,"./showPoly":12,"./undoPin":13,"ramda":1}],7:[function(require,module,exports){
 var opts = {
   mapOpts: {
     center: { lat: 39.7392, lng: -104.9903 },
@@ -9066,6 +9068,41 @@ var opts = {
 module.exports = opts
 
 },{}],8:[function(require,module,exports){
+'use strict'
+
+var getRemote = require('./ajaxRequest')
+var polygons = getRemote('polygons')
+
+var fillColors = [ '#1CB841', '#CA3C3C', '#DF7514', '#42B8DD' ]
+
+// this breaks b/c polygons in DB don't all have ltglng data
+module.exports = function(map){
+  var vertices = []
+  polygons.forEach(function(polygon){
+    polygon.paths.forEach(function(path){
+      vertices.push({ lat: polygon.path.lat, lng: polygon.path.lng })
+    })
+    var newPolygon = new google.maps.Polygon({
+      paths: vertices,
+      map: map,
+      strokeColor: '#ff0000',
+      fillColor: '#ff0000',
+      fillOpacity: 0.25
+    })
+  })
+
+}
+  //var vertices = []
+  //polygons.forEach(function(polygon){
+  //  polygon.paths.forEach(function (path){
+  //    vertices.push({ lat: path.lat, lng: path.lng })
+  //  })
+  //})
+  //console.log(vertices)
+
+
+
+},{"./ajaxRequest":2}],9:[function(require,module,exports){
 module.exports = function(map, el) {
   'use strict'
   var elem = document.getElementById(el)
@@ -9075,7 +9112,7 @@ module.exports = function(map, el) {
   })
 }
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports = function(map, paths, el){
   'use strict'
   var thisPath = paths
@@ -9094,7 +9131,7 @@ module.exports = function(map, paths, el){
   })
 }
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict'
 
 var R = require('ramda')
@@ -9145,7 +9182,7 @@ module.exports = function(map, polygon, markers, results, el){
 
 }
 
-},{"./ajaxRequest":2,"ramda":1}],11:[function(require,module,exports){
+},{"./ajaxRequest":2,"ramda":1}],12:[function(require,module,exports){
 'use strict'
 
 var getRemote = require('./ajaxRequest')
@@ -9166,7 +9203,7 @@ module.exports = function(el, target){
       parentNode.removeChild(parentNode.firstChild)
     }
 
-    // use map here
+    // use .map here
     polygons.forEach(function(polygon){
       var polyTemplate = `Polygon: ${polygon.name}`
       var node = document.createElement('LI')
@@ -9189,7 +9226,7 @@ module.exports = function(el, target){
   })
 }
 
-},{"./ajaxRequest":2}],12:[function(require,module,exports){
+},{"./ajaxRequest":2}],13:[function(require,module,exports){
 module.exports = function(el){
   'use strict'
 

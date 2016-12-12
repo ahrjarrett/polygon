@@ -12,9 +12,9 @@ module.exports = function(map, path, el){
 
     currentPath.forEach(function(path, idx) {
       if (idx === currentPath.length - 1) {
-        var logTemplate = `{ lat: ${path.lat()}, lng: ${path.lng() } }`
+        var logTemplate = `{ "lat": ${path.lat()}, "lng": ${path.lng() } }`
       } else {
-        var logTemplate = `{ lat: ${path.lat()}, lng: ${path.lng()} },`
+        var logTemplate = `{ "lat": ${path.lat()}, "lng": ${path.lng()} },`
       }
       var node = document.createElement('li')
       var textnode = document.createTextNode(logTemplate)

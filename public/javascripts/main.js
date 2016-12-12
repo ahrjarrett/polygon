@@ -10,6 +10,7 @@
     var logCoordinates = require('./logCoordinates')
     var logHomes = require('./logHomes')
     var opts = require('./opts')
+    var renderPolygon = require('./renderPolygon')
     var saveHomes = require('./saveHomes')
     var showHomes = require('./showHomes')
     var savePoly = require('./savePoly')
@@ -32,6 +33,7 @@
     })
 
     // execute side-effects
+    //renderPolygon(map)
     showHomes(map, polygon, markers, results, 'show-homes')
     showPoly('show-poly', 'poly-log')
     logHomes(map, polygon, 'log-homes')
