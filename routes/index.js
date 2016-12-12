@@ -1,31 +1,31 @@
 var express = require('express')
 var mongoose = require('mongoose')
 var router = express.Router()
+//var Home = require('../models/home')
 
 var Schema = mongoose.Schema
-mongoose.model('home', new Schema({
-  formatted_address: String
-}, { collection: 'homes_test' }))
+var HomeSchema = new Schema({
+  name: String,
+  paths: [{ lat: Number, lng: Number }],
+  description: String
+})
+mongoose.model('homes', HomeSchema, 'homes_test' )
 
-// GOT DATABASE TO POST!
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Google Maps Polygon' })
 })
 
 router.get('/homes', function(req, res, next){
-  mongoose.model('home').find(function(err, homes){
+  mongoose.model('homes').find(function(err, homes){
     res.json(homes)
   })
 })
 
 router.get('/homes/:id', function(req, res, next){
-  mongoose.model('home').find({ _id: req.params.id }, function(err, home){
+  mongoose.model('homes').find({ _id: req.params.id }, function(err, home){
     res.json(home)
   })
 })
-
-// ADD FUNCTIONALITY TO SAVE POLYGON COORDINATES (R.lensProp?)
-// form in index.jade posts to '/save-data' for now
 
 module.exports = router
 

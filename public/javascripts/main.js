@@ -35,7 +35,7 @@
 
     var currentPath = polygon.getPath()
     google.maps.event.addListener(map, 'click', function(e) {
-      if(currentPath.length < 6) currentPath.push(e.latLng)
+      if(currentPath.length < 7) currentPath.push(e.latLng)
     })
 
     showHomes(map, polygon, markers, results, 'show-homes')
