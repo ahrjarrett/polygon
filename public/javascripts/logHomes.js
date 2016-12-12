@@ -1,6 +1,6 @@
 var R = require('ramda')
 var getRemote = require('./ajaxRequest')
-var homes = getRemote()
+var homes = getRemote('homes')
 
 module.exports = function(map, poly, el){
   var polygon = poly
@@ -39,9 +39,9 @@ module.exports = function(map, poly, el){
 
     var parentNode = document.getElementById('address-log')
     while (parentNode.firstChild) {
+      results = []
       parentNode.removeChild(parentNode.firstChild)
     }
-
     results.forEach(function(home, idx){
       var logTemplate = `${home.formatted_address}`
       var node = document.createElement('LI')
@@ -52,6 +52,7 @@ module.exports = function(map, poly, el){
       nodeInner.appendChild(textnode)
       nodeInner.setAttribute('href', `/homes/${home._id}`)
       parentNode.appendChild(node)
+
     })
   })
 }

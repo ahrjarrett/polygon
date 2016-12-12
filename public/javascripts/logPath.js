@@ -11,7 +11,8 @@ module.exports = function(map, path, el){
     }
 
     currentPath.forEach(function(coordinate, idx){
-      var logTemplate = `{ ${coordinate.lat()}, ${coordinate.lng()}}`
+      var logTemplate = `{ lat: ${coordinate.lat()}, lng: ${coordinate.lng()}},`
+
       var node = document.createElement('LI')
       var textnode = document.createTextNode(logTemplate)
       node.appendChild(textnode)

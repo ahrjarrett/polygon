@@ -1,6 +1,6 @@
 var R = require('ramda')
 var getRemote = require('./ajaxRequest')
-var homes = getRemote()
+var homes = getRemote('homes')
 
 module.exports = function(map, poly, el){
   var polygon = poly
@@ -40,6 +40,7 @@ module.exports = function(map, poly, el){
     getHomes(homes)
 
     while (parentNode.firstChild) {
+      results = []
       parentNode.removeChild(parentNode.firstChild);
     }
     deleteMarkers()

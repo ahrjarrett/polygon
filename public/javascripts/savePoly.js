@@ -1,10 +1,11 @@
-module.exports = function(map, path, el){
-  var currentPath = path
+module.exports = function(map, paths, el){
+  var thisPath = paths
   var el = document.getElementById(el)
   el.addEventListener('click', function(e){
-    e.preventDefault()
+    // FOR SOME REASON: e.preventDefault prevents form from hitting DB
+    //e.preventDefault()
     var newPoly = new google.maps.Polygon({
-      path: currentPath,
+      paths: thisPath,
       strokeColor: '#000',
       fillColor: '#000',
       opacity: .25

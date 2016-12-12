@@ -1,7 +1,7 @@
-module.exports = function () {
+module.exports = function (urlCall) {
   return $.ajax({
     type: 'GET',
-    url: 'homes',
+    url: urlCall,
     dataType: 'json',
     async: false
   }).responseJSON

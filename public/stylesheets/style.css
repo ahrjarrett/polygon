@@ -129,3 +129,8 @@ label {
 button#clear-logger, button#clear-map {
   padding: 0 8px;
 }
+
+#path-log  {
+  list-style: none;
+}
+

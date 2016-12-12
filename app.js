@@ -11,8 +11,6 @@ var app = express()
 var index = require('./routes/index')
 var polyRoutes = require('./routes/savePoly')
 
-var Home = require('./models/home')
-
 mongoose.connect('mongodb://admin:rootbeer@ds127968.mlab.com:27968/gmaps_polygon', function(err) {
   if (err) { console.log(err) }
   else { console.log('connected to db') }

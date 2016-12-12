@@ -16,6 +16,9 @@ block content
       .path-log
         strong Polygon Coordinates:
         ul#path-log.logger
+      .poly-log
+        strong Saved Polygons:
+        ul#poly-log.logger
     #map-canvas.map-canvas
     #main-interface.main-interface
       script.
@@ -23,11 +26,12 @@ block content
         var maxPriceOutput = '#max-price-output'
         function outputUpdate(price, id) { document.querySelector(id).value = `$${price}`}
       button#show-homes.pure-button.pure-button-primary Show Homes Inside Polygon
-      button#log-homes.log-homes.pure-button.button-secondary Log Home Addresses
-      button#log-coordinates.log-coordinates.pure-button.pure-button-primary Log Home Coordinates
+      button#log-homes.log-homes.pure-button.button-secondary Toggle Home Addresses
+      button#log-coordinates.log-coordinates.pure-button.pure-button-primary Toggle Home Coordinates
       button#log-path.log-path.pure-button.button-secondary Log Polygon Coordinates
-      button#undo-point.undo-point.pure-button.pure-button-primary Undo Last Pin-Drop
-      button#see-json.see-json(onclick='location.href="/homes"').pure-button.button-secondary Inspect Database
+      button#show-poly.show-poly.pure-button.pure-button-primary Show List of Polygons
+      button#undo-point.undo-point.pure-button.button-secondary Undo Last Pin-Drop
+      button#see-json.see-json(onclick='location.href="/homes"').pure-button.pure-button-primary Inspect Database
       .price-range
         label(for='min-price') Min Price
         input.price-filter(id='min-price' type='range' min='0' max='1500000' step='100' value='0' oninput='outputUpdate(value, minPriceOutput)')
@@ -39,10 +43,12 @@ block content
           output.price(for='max-price' id='max-price-output') $1500000
       form#add-data(name='add-data' action='/save-data' method='POST')
         label(for='add-data') Add New Home to Database:
-        input.add-input.add-street(type='text' placeholder='123 Main St')
-        input.add-input.add-price(type='text' placeholder='$1,000,000')
+        input.add-input.add-street(name='street' type='text' placeholder='123 Main St')
+        input.add-input.add-price(name='price' type='text' placeholder='$1,000,000')
         input#save-home.submit-data.pure-button.button-success(type='submit' value='Add Home')
       form#add-poly(name='add-poly' action='/save-poly' method='POST')
         label(for='add-poly') Save Current Polygon:
-        input.add-input.add-name(type='text' placeholder='My Cool Polygon Name')
+        input.add-input.add-name(name='name' type='text' placeholder='My Cool Polygon Name')
+        input.add-input.add-location(name='paths' type='text' placeholder='Array of Lat/Lng Objs, plz')
+        input.add-input.add-description(name='description' type='text' placeholder='Describe your polygon...')
         input#save-poly.submit-data.pure-button.button-success(type='submit' value='My Cool Polygon Name')
