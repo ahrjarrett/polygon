@@ -84,8 +84,7 @@ li {
 form#add-data {
   background-color: #ddd;
   text-align: center;
-  padding-top: 15px;
-  padding-bottom: 20px;
+  padding: 15px 10px 20px;
 }
 
 #add-data label {
@@ -93,11 +92,14 @@ form#add-data {
   margin: 0 auto;
 }
 .submit-data, .add-input {
-  min-width: 100%;
   font-size: 18px;
 }
 .add-input{
   padding: 5px;
+  width: 250px;
+}
+.submit-data{
+  width: 98%;
 }
 .add-street {
   margin-top: 7.5px;

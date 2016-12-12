@@ -1,5 +1,6 @@
 var R = require('ramda')
-var homes = require('../../db/data.json')
+var getRemote = require('./ajaxRequest')
+var homes = getRemote()
 
 module.exports = function(map, poly, el){
   var polygon = poly

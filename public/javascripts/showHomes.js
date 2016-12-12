@@ -1,5 +1,7 @@
 var R = require('ramda')
-var homes = require('../../db/data.json')
+var mongoose = require('mongoose')
+var getRemote = require('./ajaxRequest')
+var homes = getRemote()
 
 module.exports = function(map, polygon, markers, results, el){
   var showHomes = document.getElementById(el)

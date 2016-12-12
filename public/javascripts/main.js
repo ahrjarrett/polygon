@@ -1,7 +1,7 @@
 (function(){
 
   var R = require('ramda')
-  var homes = require('../../db/data.json')
+  //var homes = require('../../db/data.json')
 
   var map
   var markers = []

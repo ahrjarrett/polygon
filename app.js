@@ -8,7 +8,6 @@ var path = require('path')
 var app = express()
 
 var index = require('./routes/index')
-var data = require('./routes/data')
 var Home = require('./models/home')
 
 mongoose.connect('mongodb://admin:rootbeer@ds127968.mlab.com:27968/gmaps_polygon', function(err) {
@@ -24,9 +23,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'node_modules/jquery/dist')))
 
 app.use('/', index)
-app.use('/data', data)
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found')
