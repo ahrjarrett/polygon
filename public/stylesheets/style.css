@@ -108,8 +108,8 @@ label {
   width: 250px;
 }
 .submit-data{
-  width: 98%;
+  width: 260px;
 }
-.add-street {
+.add-street, add-name {
   margin-top: 7.5px;
 }

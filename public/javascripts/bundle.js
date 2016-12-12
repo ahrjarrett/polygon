@@ -38743,10 +38743,13 @@ module.exports = function(map, poly, el){
     }
     deleteMarkers()
     results.forEach(function(home, idx){
-      var logTemplate = `{ ${home.geometry.location.lat}, ${home.geometry.location.lng} }`
+      var logTemplate = `${home.geometry.location.lat}, ${home.geometry.location.lng}`
       var node = document.createElement('LI')
+      var nodeInner = document.createElement('A')
       var textnode = document.createTextNode(logTemplate)
-      node.appendChild(textnode)
+      node.appendChild(nodeInner)
+      nodeInner.appendChild(textnode)
+      nodeInner.setAttribute('href', `/homes/${home._id}`)
       parentNode.appendChild(node)
     })
 
@@ -38802,8 +38805,12 @@ module.exports = function(map, poly, el){
     results.forEach(function(home, idx){
       var logTemplate = `${home.formatted_address}`
       var node = document.createElement('LI')
+      var nodeInner = document.createElement('A')
       var textnode = document.createTextNode(logTemplate)
-      node.appendChild(textnode)
+
+      node.appendChild(nodeInner)
+      nodeInner.appendChild(textnode)
+      nodeInner.setAttribute('href', `/homes/${home._id}`)
       parentNode.appendChild(node)
     })
   })

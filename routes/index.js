@@ -18,6 +18,12 @@ router.get('/homes', function(req, res, next){
   })
 })
 
+router.get('/homes/:id', function(req, res, next){
+  mongoose.model('home').find({ _id: req.params.id }, function(err, home){
+    res.json(home)
+  })
+})
+
 // ADD FUNCTIONALITY TO SAVE POLYGON COORDINATES (R.lensProp?)
 // form in index.jade posts to '/save-data' for now
 
