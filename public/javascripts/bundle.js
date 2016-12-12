@@ -8848,6 +8848,7 @@ var getRemote = require('./ajaxRequest')
 var homes = getRemote('homes')
 
 module.exports = function(map, poly, el){
+  'use strict'
   var polygon = poly
   var markers = []
   var results = []
@@ -8910,6 +8911,7 @@ var getRemote = require('./ajaxRequest')
 var homes = getRemote('homes')
 
 module.exports = function(map, poly, el){
+  'use strict'
   var polygon = poly
   var markers = []
   var results = []
@@ -8995,11 +8997,11 @@ module.exports = function(map, path, el){
 
 },{}],6:[function(require,module,exports){
 (function(){
-
-  var R = require('ramda')
+  'use strict'
 
   var map
   var markers = []
+  var R = require('ramda')
 
   function initMap() {
     var logPath = require('./logPath')
@@ -9014,6 +9016,7 @@ module.exports = function(map, path, el){
 
     var mapDiv = 'map-canvas'
     var mapOpts = opts.mapOpts
+    var results = []
 
     map = new google.maps.Map(document.getElementById(mapDiv), mapOpts)
 
@@ -9027,7 +9030,7 @@ module.exports = function(map, path, el){
     })
 
     // execute side-effects
-    showHomes(map, polygon, markers, results = [], 'show-homes')
+    showHomes(map, polygon, markers, results, 'show-homes')
     showPoly('show-poly', 'poly-log')
     logHomes(map, polygon, 'log-homes')
     logCoordinates(map, polygon, 'log-coordinates')
@@ -9064,6 +9067,7 @@ module.exports = opts
 
 },{}],8:[function(require,module,exports){
 module.exports = function(map, el) {
+  'use strict'
   var elem = document.getElementById(el)
   elem.addEventListener('click', function(e){
     //e.preventDefault()
@@ -9073,25 +9077,26 @@ module.exports = function(map, el) {
 
 },{}],9:[function(require,module,exports){
 module.exports = function(map, paths, el){
+  'use strict'
   var thisPath = paths
   var el = document.getElementById(el)
   el.addEventListener('click', function(e){
-    // FOR SOME REASON: e.preventDefault prevents form from hitting DB
-    //e.preventDefault()
+    // for some reason preventDefault() prevents form from hitting DB
+    e.preventDefault()
     var newPoly = new google.maps.Polygon({
       paths: thisPath,
       strokeColor: '#000',
       fillColor: '#000',
       opacity: .25
     })
-    console.log(newPoly)
 
     newPoly.setMap(map)
-
   })
 }
 
 },{}],10:[function(require,module,exports){
+'use strict'
+
 var R = require('ramda')
 var getRemote = require('./ajaxRequest')
 var homes = getRemote('homes')
@@ -9141,6 +9146,8 @@ module.exports = function(map, polygon, markers, results, el){
 }
 
 },{"./ajaxRequest":2,"ramda":1}],11:[function(require,module,exports){
+'use strict'
+
 var getRemote = require('./ajaxRequest')
 var polygons = getRemote('polygons')
 
@@ -9185,6 +9192,8 @@ module.exports = function(el, target){
 
 },{"./ajaxRequest":2}],12:[function(require,module,exports){
 module.exports = function(el){
+  'use strict'
+
   var undoPin = document.getElementById(el)
   undoPin.addEventListener('click', function(e){
     e.preventDefault()

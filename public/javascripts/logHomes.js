@@ -3,6 +3,7 @@ var getRemote = require('./ajaxRequest')
 var homes = getRemote('homes')
 
 module.exports = function(map, poly, el){
+  'use strict'
   var polygon = poly
   var markers = []
   var results = []

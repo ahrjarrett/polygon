@@ -1,9 +1,9 @@
 (function(){
-
-  var R = require('ramda')
+  'use strict'
 
   var map
   var markers = []
+  var R = require('ramda')
 
   function initMap() {
     var logPath = require('./logPath')
@@ -18,6 +18,7 @@
 
     var mapDiv = 'map-canvas'
     var mapOpts = opts.mapOpts
+    var results = []
 
     map = new google.maps.Map(document.getElementById(mapDiv), mapOpts)
 
@@ -31,7 +32,7 @@
     })
 
     // execute side-effects
-    showHomes(map, polygon, markers, results = [], 'show-homes')
+    showHomes(map, polygon, markers, results, 'show-homes')
     showPoly('show-poly', 'poly-log')
     logHomes(map, polygon, 'log-homes')
     logCoordinates(map, polygon, 'log-coordinates')

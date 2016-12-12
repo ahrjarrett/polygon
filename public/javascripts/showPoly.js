@@ -1,3 +1,5 @@
+'use strict'
+
 var getRemote = require('./ajaxRequest')
 var polygons = getRemote('polygons')
 

@@ -1,3 +1,5 @@
+'use strict'
+
 var express = require('express')
 var encodeUriQuery = require('encode-uri-query')
 var mongoose = require('mongoose')

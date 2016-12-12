@@ -1,3 +1,5 @@
+'use strict'
+
 var R = require('ramda')
 var getRemote = require('./ajaxRequest')
 var homes = getRemote('homes')
