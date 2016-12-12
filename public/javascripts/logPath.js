@@ -1,7 +1,15 @@
 // break while loop and forEach into own module
-module.exports = function(path, el){
+module.exports = function(map, path, el){
   this.currentPath = path
   var logPath = document.getElementById(el)
+
+
+
+  //path: new google.maps.MVCArray(),
+  //strokeColor: '#1cb841',
+  //fillColor: '#1cb841',
+  //draggable: true,
+  //opacity: .25
 
   logPath.addEventListener('click', function(e){
     e.preventDefault()

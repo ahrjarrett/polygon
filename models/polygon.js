@@ -4,7 +4,9 @@ var Schema = mongoose.Schema
 var PolygonSchema = new Schema({
   id: Schema.ObjectId,
   name: String,
-  coordinates: [
-
+  paths: [
+    { lat: Number, lng: Number }
   ]
 })
+
+module.exports = mongoose.model('Polygon', PolygonSchema)

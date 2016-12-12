@@ -14,6 +14,7 @@
     var logCoordinates = require('./logCoordinates')
     var logHomes = require('./logHomes')
     var showHomes = require('./showHomes')
+    var savePoly = require('./savePoly')
 
     var mapDiv = 'map-canvas'
     var mapOpts = opts.mapOpts
@@ -32,8 +33,9 @@
     showHomes(map, polygon, markers, results, 'show-homes')
     logHomes(map, polygon, 'log-homes')
     logCoordinates(map, polygon, 'log-coordinates')
-    logPath(currentPath, 'log-path')
+    logPath(map, currentPath, 'log-path')
     undoPin('undo-point')
+    savePoly(map, newPath, 'save-poly')
 
   }
   window.onload = initMap

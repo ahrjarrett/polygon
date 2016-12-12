@@ -9,6 +9,8 @@ var path = require('path')
 var app = express()
 
 var index = require('./routes/index')
+var polyRoutes = require('./routes/savePoly')
+
 var Home = require('./models/home')
 
 mongoose.connect('mongodb://admin:rootbeer@ds127968.mlab.com:27968/gmaps_polygon', function(err) {
@@ -27,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'node_modules/jquery/dist')))
 
 app.use('/', index)
+app.use(polyRoutes)
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found')
