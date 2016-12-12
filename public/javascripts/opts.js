@@ -7,8 +7,9 @@ var opts = {
     path: new google.maps.MVCArray(),
     strokeColor: '#1cb841',
     fillColor: '#1cb841',
+    opacity: .25,
     draggable: true,
-    opacity: .25
+    editable: true
   }
 }
 

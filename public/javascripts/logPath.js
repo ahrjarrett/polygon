@@ -10,13 +10,17 @@ module.exports = function(map, path, el){
       parentNode.removeChild(parentNode.firstChild)
     }
 
-    currentPath.forEach(function(coordinate, idx){
-      var logTemplate = `{ lat: ${coordinate.lat()}, lng: ${coordinate.lng()}},`
-
-      var node = document.createElement('LI')
+    currentPath.forEach(function(path, idx) {
+      if (idx === currentPath.length - 1) {
+        var logTemplate = `{ lat: ${path.lat()}, lng: ${path.lng() } }`
+      } else {
+        var logTemplate = `{ lat: ${path.lat()}, lng: ${path.lng()} },`
+      }
+      var node = document.createElement('li')
       var textnode = document.createTextNode(logTemplate)
       node.appendChild(textnode)
       parentNode.appendChild(node)
     })
+
   })
 }

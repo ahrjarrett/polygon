@@ -1,5 +1,4 @@
 var getRemote = require('./ajaxRequest')
-//var Polygon = require('../../models/polygon')
 var polygons = getRemote('polygons')
 
 module.exports = function(el, target){
@@ -9,34 +8,34 @@ module.exports = function(el, target){
 
   showPoly.addEventListener('click', function(e){
     e.preventDefault()
-    function trimTags(html, regex, result){
-      return
-    }
 
+    // consider making a fn called trimTags that removes outer html tags
     var parentNode = document.getElementById(target)
     while (parentNode.firstChild) {
       results = []
       parentNode.removeChild(parentNode.firstChild)
     }
-    polygons.forEach(function(polygon, idx){
-      var polyTemplate = `name: ${polygon.name}, paths: ${polygon.paths[0]}`
+
+    // use map here
+    polygons.forEach(function(polygon){
+      var polyTemplate = `Polygon: ${polygon.name}`
       var node = document.createElement('LI')
       var nodeInner = document.createElement('A')
       var textnode = document.createTextNode(polyTemplate)
+      console.log(polygon.paths)
 
       node.appendChild(nodeInner)
       nodeInner.appendChild(textnode)
       nodeInner.setAttribute('href', `/polygons/${polygon._id}`)
       parentNode.appendChild(node)
 
+      // get rid of 4 loop
       for(var i = 0; i < parentNode.children.length; i++) {
         results.push(parentNode.lastChild.innerText)
-        parentNode.removeChild(parentNode.lastChild)
+        parentNode.appendChild(parentNode.lastChild)
       }
 
-      console.log(results)
     })
+
   })
 }
-
-

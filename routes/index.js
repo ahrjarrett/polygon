@@ -1,15 +1,7 @@
 var express = require('express')
 var mongoose = require('mongoose')
 var router = express.Router()
-//var Home = require('../models/home')
-
-var Schema = mongoose.Schema
-var HomeSchema = new Schema({
-  name: String,
-  paths: [{ lat: Number, lng: Number }],
-  description: String
-})
-mongoose.model('homes', HomeSchema, 'homes_test' )
+var Home = require('../models/home')
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Google Maps Polygon' })

@@ -4,18 +4,17 @@
 
   var map
   var markers = []
-  var results = []
 
   function initMap() {
-    var opts = require('./opts')
-    var undoPin = require('./undoPin')
     var logPath = require('./logPath')
     var logCoordinates = require('./logCoordinates')
     var logHomes = require('./logHomes')
-    var showHomes = require('./showHomes')
+    var opts = require('./opts')
     var saveHomes = require('./saveHomes')
-    var showPoly = require('./showPoly')
+    var showHomes = require('./showHomes')
     var savePoly = require('./savePoly')
+    var showPoly = require('./showPoly')
+    var undoPin = require('./undoPin')
 
     var mapDiv = 'map-canvas'
     var mapOpts = opts.mapOpts
@@ -31,14 +30,15 @@
       if(currentPath.length < 7) currentPath.push(e.latLng)
     })
 
-    showHomes(map, polygon, markers, results, 'show-homes')
+    // execute side-effects
+    showHomes(map, polygon, markers, results = [], 'show-homes')
+    showPoly('show-poly', 'poly-log')
     logHomes(map, polygon, 'log-homes')
     logCoordinates(map, polygon, 'log-coordinates')
     logPath(map, currentPath, 'log-path')
-    showPoly('show-poly', 'poly-log')
     undoPin('undo-point')
 
-    // ORDER is important here b/c we need to get the new path just before saving
+    // order of newPath is important here b/c we need to load just before saving
     var newPath = polygon.getPath()
     savePoly(map, newPath, 'save-poly')
     saveHomes(map, 'save-home')

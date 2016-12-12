@@ -8855,8 +8855,8 @@ module.exports = function(map, poly, el){
   var maxPrice = document.getElementById('max-price').value
 
   var getHomes = R.map(function(home){
-    var datum = new google.maps.LatLng(home.geometry.location)
-    if(home.geometry.price >= minPrice && home.geometry.price <= maxPrice){
+    var datum = new google.maps.LatLng(home.latlng)
+    if(home.price >= minPrice && home.price <= maxPrice){
       if(google.maps.geometry.poly.containsLocation(datum, polygon)) {
           results.push(home)
       }
@@ -8890,7 +8890,7 @@ module.exports = function(map, poly, el){
     }
     deleteMarkers()
     results.forEach(function(home, idx){
-      var logTemplate = `${home.geometry.location.lat}, ${home.geometry.location.lng}`
+      var logTemplate = `${home.latlng.lat}, ${home.latlng.lng}`
       var node = document.createElement('LI')
       var nodeInner = document.createElement('A')
       var textnode = document.createTextNode(logTemplate)
@@ -8917,8 +8917,8 @@ module.exports = function(map, poly, el){
   var maxPrice = document.getElementById('max-price').value
 
   var getHomes = R.map(function(home){
-    var datum = new google.maps.LatLng(home.geometry.location)
-    if(home.geometry.price >= minPrice && home.geometry.price <= maxPrice){
+    var datum = new google.maps.LatLng(home.latlng)
+    if(home.price >= minPrice && home.price <= maxPrice){
       if(google.maps.geometry.poly.containsLocation(datum, polygon)) {
         results.push(home)
       }
@@ -8978,14 +8978,18 @@ module.exports = function(map, path, el){
       parentNode.removeChild(parentNode.firstChild)
     }
 
-    currentPath.forEach(function(coordinate, idx){
-      var logTemplate = `{ lat: ${coordinate.lat()}, lng: ${coordinate.lng()}},`
-
-      var node = document.createElement('LI')
+    currentPath.forEach(function(path, idx) {
+      if (idx === currentPath.length - 1) {
+        var logTemplate = `{ lat: ${path.lat()}, lng: ${path.lng() } }`
+      } else {
+        var logTemplate = `{ lat: ${path.lat()}, lng: ${path.lng()} },`
+      }
+      var node = document.createElement('li')
       var textnode = document.createTextNode(logTemplate)
       node.appendChild(textnode)
       parentNode.appendChild(node)
     })
+
   })
 }
 
@@ -8996,18 +9000,17 @@ module.exports = function(map, path, el){
 
   var map
   var markers = []
-  var results = []
 
   function initMap() {
-    var opts = require('./opts')
-    var undoPin = require('./undoPin')
     var logPath = require('./logPath')
     var logCoordinates = require('./logCoordinates')
     var logHomes = require('./logHomes')
-    var showHomes = require('./showHomes')
+    var opts = require('./opts')
     var saveHomes = require('./saveHomes')
-    var showPoly = require('./showPoly')
+    var showHomes = require('./showHomes')
     var savePoly = require('./savePoly')
+    var showPoly = require('./showPoly')
+    var undoPin = require('./undoPin')
 
     var mapDiv = 'map-canvas'
     var mapOpts = opts.mapOpts
@@ -9023,14 +9026,15 @@ module.exports = function(map, path, el){
       if(currentPath.length < 7) currentPath.push(e.latLng)
     })
 
-    showHomes(map, polygon, markers, results, 'show-homes')
+    // execute side-effects
+    showHomes(map, polygon, markers, results = [], 'show-homes')
+    showPoly('show-poly', 'poly-log')
     logHomes(map, polygon, 'log-homes')
     logCoordinates(map, polygon, 'log-coordinates')
     logPath(map, currentPath, 'log-path')
-    showPoly('show-poly', 'poly-log')
     undoPin('undo-point')
 
-    // ORDER is important here b/c we need to get the new path just before saving
+    // order of newPath is important here b/c we need to load just before saving
     var newPath = polygon.getPath()
     savePoly(map, newPath, 'save-poly')
     saveHomes(map, 'save-home')
@@ -9050,8 +9054,9 @@ var opts = {
     path: new google.maps.MVCArray(),
     strokeColor: '#1cb841',
     fillColor: '#1cb841',
+    opacity: .25,
     draggable: true,
-    opacity: .25
+    editable: true
   }
 }
 
@@ -9062,7 +9067,7 @@ module.exports = function(map, el) {
   var elem = document.getElementById(el)
   elem.addEventListener('click', function(e){
     //e.preventDefault()
-
+    // CLEAR OUT THE FORM UPON SUBMISSION HERE:
   })
 }
 
@@ -9118,11 +9123,11 @@ module.exports = function(map, polygon, markers, results, el){
     }
 
     var getHomes = R.map(function(home){
-      var datum = new google.maps.LatLng(home.geometry.location)
-      if(home.geometry.price >= minPrice && home.geometry.price <= maxPrice){
+      var datum = new google.maps.LatLng(home.latlng)
+      if(home.price >= minPrice && home.price <= maxPrice){
         if(google.maps.geometry.poly.containsLocation(datum, polygon)) {
             results.push(home)
-            markers.push(new google.maps.Marker({ position: home.geometry.location }))
+            markers.push(new google.maps.Marker({ position: home.latlng }))
         }
       }
     })
@@ -9137,7 +9142,6 @@ module.exports = function(map, polygon, markers, results, el){
 
 },{"./ajaxRequest":2,"ramda":1}],11:[function(require,module,exports){
 var getRemote = require('./ajaxRequest')
-//var Polygon = require('../../models/polygon')
 var polygons = getRemote('polygons')
 
 module.exports = function(el, target){
@@ -9147,37 +9151,37 @@ module.exports = function(el, target){
 
   showPoly.addEventListener('click', function(e){
     e.preventDefault()
-    function trimTags(html, regex, result){
-      return
-    }
 
+    // consider making a fn called trimTags that removes outer html tags
     var parentNode = document.getElementById(target)
     while (parentNode.firstChild) {
       results = []
       parentNode.removeChild(parentNode.firstChild)
     }
-    polygons.forEach(function(polygon, idx){
-      var polyTemplate = `name: ${polygon.name}, paths: ${polygon.paths[0]}`
+
+    // use map here
+    polygons.forEach(function(polygon){
+      var polyTemplate = `Polygon: ${polygon.name}`
       var node = document.createElement('LI')
       var nodeInner = document.createElement('A')
       var textnode = document.createTextNode(polyTemplate)
+      console.log(polygon.paths)
 
       node.appendChild(nodeInner)
       nodeInner.appendChild(textnode)
       nodeInner.setAttribute('href', `/polygons/${polygon._id}`)
       parentNode.appendChild(node)
 
+      // get rid of 4 loop
       for(var i = 0; i < parentNode.children.length; i++) {
         results.push(parentNode.lastChild.innerText)
-        parentNode.removeChild(parentNode.lastChild)
+        parentNode.appendChild(parentNode.lastChild)
       }
 
-      console.log(results)
     })
+
   })
 }
-
-
 
 },{"./ajaxRequest":2}],12:[function(require,module,exports){
 module.exports = function(el){

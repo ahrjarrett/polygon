@@ -10,8 +10,8 @@ module.exports = function(map, poly, el){
   var maxPrice = document.getElementById('max-price').value
 
   var getHomes = R.map(function(home){
-    var datum = new google.maps.LatLng(home.geometry.location)
-    if(home.geometry.price >= minPrice && home.geometry.price <= maxPrice){
+    var datum = new google.maps.LatLng(home.latlng)
+    if(home.price >= minPrice && home.price <= maxPrice){
       if(google.maps.geometry.poly.containsLocation(datum, polygon)) {
           results.push(home)
       }
@@ -45,7 +45,7 @@ module.exports = function(map, poly, el){
     }
     deleteMarkers()
     results.forEach(function(home, idx){
-      var logTemplate = `${home.geometry.location.lat}, ${home.geometry.location.lng}`
+      var logTemplate = `${home.latlng.lat}, ${home.latlng.lng}`
       var node = document.createElement('LI')
       var nodeInner = document.createElement('A')
       var textnode = document.createTextNode(logTemplate)
