@@ -110,6 +110,6 @@ label {
 .submit-data{
   width: 260px;
 }
-.add-street, add-name {
+.add-street, .add-name {
   margin-top: 7.5px;
 }
