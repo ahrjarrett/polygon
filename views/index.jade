@@ -37,4 +37,8 @@ block content
         label(for='add-data') Add New Home to Database:
         input.add-input.add-street(type='text' placeholder='123 Main St')
         input.add-input.add-price(type='text' placeholder='$1,000,000')
-        input.submit-data.pure-button.pure-button-primary(type='submit' value='Add Home')
+        input#save-home.submit-data.pure-button.button-success(type='submit' value='Add Home')
+      form#add-poly(name='add-poly' action='/save-poly' method='POST')
+        label(for='add-poly') Save Current Polygon:
+        input.add-input.add-name(type='text' placeholder='My Cool Polygon Name')
+        input#save-poly.submit-data.pure-button.button-success(type='submit' value='My Cool Polygon Name')

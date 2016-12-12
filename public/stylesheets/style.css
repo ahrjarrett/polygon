@@ -71,23 +71,32 @@ li {
   /*margin-left: 100px;*/
 }
 
-.button-secondary {
-  background: rgb(66, 184, 221);
+.button-success, .button-secondary {
   color: white;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+.button-secondary {
+  background: rgb(66, 184, 221);
+}
+
+.button-success {
+  background: rgb(28, 184, 65);
 }
 
 #min-interface button {
   min-height: 30px !important;
 }
 
-form#add-data {
-  background-color: #ddd;
+form#add-data, form#add-poly {
+  background-color: #eee;
   text-align: center;
   padding: 15px 10px 20px;
 }
+form#add-poly{
+  background-color: #ddd;
+}
 
-#add-data label {
+label {
   font-size: 18px;
   margin: 0 auto;
 }

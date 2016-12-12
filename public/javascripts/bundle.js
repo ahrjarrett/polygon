@@ -38824,7 +38824,7 @@ module.exports = function(path, el){
     }
 
     currentPath.forEach(function(coordinate, idx){
-      var logTemplate = `{ ${coordinate.lat()}, ${coordinate.lng()} }`
+      var logTemplate = `{ ${coordinate.lat()}, ${coordinate.lng()}}`
       var node = document.createElement('LI')
       var textnode = document.createTextNode(logTemplate)
       node.appendChild(textnode)
