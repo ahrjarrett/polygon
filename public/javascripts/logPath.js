@@ -1,9 +1,9 @@
 // break while loop and forEach into own module
 module.exports = function(map, path, el){
   this.currentPath = path
-  var logPath = document.getElementById(el)
+  var logData = document.getElementById(el)
 
-  logPath.addEventListener('click', function(e){
+  logData.addEventListener('click', function(e){
     e.preventDefault()
     var parentNode = document.getElementById('path-log')
     while (parentNode.firstChild) {

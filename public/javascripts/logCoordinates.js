@@ -1,3 +1,7 @@
+// is anything being done with markers in this file?
+// if not, get rid of setMapOnAll, clearMarkers, etc.
+// don't forget the call to deleteMarkers on line 51
+
 var R = require('ramda')
 var getRemote = require('./ajaxRequest')
 var homes = getRemote('homes')
@@ -32,8 +36,8 @@ module.exports = function(map, poly, el){
     markers = []
   }
 
-  var logCoordinates = document.getElementById(el)
-  logCoordinates.addEventListener('click', function(e){
+  var logData = document.getElementById(el)
+  logData.addEventListener('click', function(e){
 
     e.preventDefault()
     var parentNode = document.getElementById('coordinates-log')
@@ -44,6 +48,7 @@ module.exports = function(map, poly, el){
       results = []
       parentNode.removeChild(parentNode.firstChild);
     }
+    // does deleteMarkers do anything? if not, remove fns above too
     deleteMarkers()
     results.forEach(function(home, idx){
       var logTemplate = `${home.latlng.lat}, ${home.latlng.lng}`
@@ -55,7 +60,6 @@ module.exports = function(map, poly, el){
       nodeInner.setAttribute('href', `/homes/${home._id}`)
       parentNode.appendChild(node)
     })
-
 
   })
 }

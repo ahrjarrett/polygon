@@ -6,6 +6,7 @@ block content
       .log-column
         .logger-header LOGGER
         button#clear-logger.pure-button(onclick='clearLog()') Clear Log
+        button#undo-point.undo-point.pure-button Undo Pin
         //- button#clear-map.pure-button(onclick='clearMap()') Clear Map
       .address-log
         strong Homes inside Polygon:
@@ -30,7 +31,7 @@ block content
       button#log-coordinates.log-coordinates.pure-button.pure-button-primary Show/Hide Home Coordinates
       button#log-path.log-path.pure-button.button-secondary Log Polygon Coordinates
       button#show-poly.show-poly.pure-button.pure-button-primary Show List of Polygons
-      button#undo-point.undo-point.pure-button.button-secondary Undo Last Pin-Drop
+      button#show-all-poly.show-all-poly.pure-button.button-secondary Show All Polygons
       //- button#see-json.see-json(onclick='location.href="/homes"').pure-button.pure-button-primary Inspect Database
       .price-range
         label(for='min-price') Min Price

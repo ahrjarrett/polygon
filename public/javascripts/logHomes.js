@@ -10,6 +10,7 @@ module.exports = function(map, poly, el){
   var minPrice = document.getElementById('min-price').value
   var maxPrice = document.getElementById('max-price').value
 
+  // move getHomes into main.js? or does it need the closure to render dynamically?
   var getHomes = R.map(function(home){
     var datum = new google.maps.LatLng(home.latlng)
     if(home.price >= minPrice && home.price <= maxPrice){
@@ -32,8 +33,8 @@ module.exports = function(map, poly, el){
     markers = []
   }
 
-  var logHomes = document.getElementById(el)
-  logHomes.addEventListener('click', function(e){
+  var logData = document.getElementById(el)
+  logData.addEventListener('click', function(e){
     e.preventDefault()
     deleteMarkers()
     getHomes(homes)

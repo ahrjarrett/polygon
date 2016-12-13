@@ -23,6 +23,7 @@ Note that the Polygon is draggable and editable; as of now, 'Log Path' and 'Chec
 - ~~Hone Polygram and Home schema, add error handling~~
 - ~~figure out how eventListeners work when layered on Polygons (no rightclick event?)~~
 - ~~Save Polygrams in db for reference later~~
+- Remove cruft in public/javascripts (unused files, required fns that aren't invoked, etc.)
 - asynchronous req from geocode returns an array that's out of order, causes exceptions
 - POST request: /save-home *make it work at all*
 - POST request: /save-poly *make it work again*

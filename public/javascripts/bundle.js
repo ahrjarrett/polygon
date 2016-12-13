@@ -8843,6 +8843,10 @@ module.exports = function (urlCall) {
 
 
 },{}],3:[function(require,module,exports){
+// is anything being done with markers in this file?
+// if not, get rid of setMapOnAll, clearMarkers, etc.
+// don't forget the call to deleteMarkers on line 51
+
 var R = require('ramda')
 var getRemote = require('./ajaxRequest')
 var homes = getRemote('homes')
@@ -8877,8 +8881,8 @@ module.exports = function(map, poly, el){
     markers = []
   }
 
-  var logCoordinates = document.getElementById(el)
-  logCoordinates.addEventListener('click', function(e){
+  var logData = document.getElementById(el)
+  logData.addEventListener('click', function(e){
 
     e.preventDefault()
     var parentNode = document.getElementById('coordinates-log')
@@ -8889,6 +8893,7 @@ module.exports = function(map, poly, el){
       results = []
       parentNode.removeChild(parentNode.firstChild);
     }
+    // does deleteMarkers do anything? if not, remove fns above too
     deleteMarkers()
     results.forEach(function(home, idx){
       var logTemplate = `${home.latlng.lat}, ${home.latlng.lng}`
@@ -8900,7 +8905,6 @@ module.exports = function(map, poly, el){
       nodeInner.setAttribute('href', `/homes/${home._id}`)
       parentNode.appendChild(node)
     })
-
 
   })
 }
@@ -8918,6 +8922,7 @@ module.exports = function(map, poly, el){
   var minPrice = document.getElementById('min-price').value
   var maxPrice = document.getElementById('max-price').value
 
+  // move getHomes into main.js? or does it need the closure to render dynamically?
   var getHomes = R.map(function(home){
     var datum = new google.maps.LatLng(home.latlng)
     if(home.price >= minPrice && home.price <= maxPrice){
@@ -8940,8 +8945,8 @@ module.exports = function(map, poly, el){
     markers = []
   }
 
-  var logHomes = document.getElementById(el)
-  logHomes.addEventListener('click', function(e){
+  var logData = document.getElementById(el)
+  logData.addEventListener('click', function(e){
     e.preventDefault()
     deleteMarkers()
     getHomes(homes)
@@ -8971,9 +8976,9 @@ module.exports = function(map, poly, el){
 // break while loop and forEach into own module
 module.exports = function(map, path, el){
   this.currentPath = path
-  var logPath = document.getElementById(el)
+  var logData = document.getElementById(el)
 
-  logPath.addEventListener('click', function(e){
+  logData.addEventListener('click', function(e){
     e.preventDefault()
     var parentNode = document.getElementById('path-log')
     while (parentNode.firstChild) {
@@ -8996,7 +9001,8 @@ module.exports = function(map, path, el){
 }
 
 },{}],6:[function(require,module,exports){
-(function(){
+;(function(){
+
   'use strict'
 
   var map
@@ -9031,7 +9037,7 @@ module.exports = function(map, path, el){
     })
 
     // execute side-effects
-    //renderPolygon(map)
+    renderPolygon(map, 'show-all-poly')
     showHomes(map, polygon, markers, results, 'show-homes')
     showPoly('show-poly', 'poly-log')
     logHomes(map, polygon, 'log-homes')
@@ -9075,32 +9081,32 @@ var polygons = getRemote('polygons')
 
 var fillColors = [ '#1CB841', '#CA3C3C', '#DF7514', '#42B8DD' ]
 
-// this breaks b/c polygons in DB don't all have ltglng data
-module.exports = function(map){
+// WILL break b/c polygons in DB don't (all) have ltglng data
+module.exports = function(map, el){
+
+  var map = map
   var vertices = []
-  polygons.forEach(function(polygon){
-    polygon.paths.forEach(function(path){
-      vertices.push({ lat: polygon.path.lat, lng: polygon.path.lng })
+
+  var el = document.getElementById(el)
+  el.addEventListener('click', function(e) {
+    e.preventDefault()
+
+    polygons.forEach(function(polygon, idx){
+      polygon.paths.forEach(function(path){
+        vertices.push({ lat: path.lat, lng: path.lng })
+      })
+
+      var newPolygon = new google.maps.Polygon({
+        paths: vertices,
+        map: map,
+        strokeColor: fillColors[idx],
+        fillColor: fillColors[idx],
+        fillOpacity: 0.25
+      })
     })
-    var newPolygon = new google.maps.Polygon({
-      paths: vertices,
-      map: map,
-      strokeColor: '#ff0000',
-      fillColor: '#ff0000',
-      fillOpacity: 0.25
-    })
+
   })
-
 }
-  //var vertices = []
-  //polygons.forEach(function(polygon){
-  //  polygon.paths.forEach(function (path){
-  //    vertices.push({ lat: path.lat, lng: path.lng })
-  //  })
-  //})
-  //console.log(vertices)
-
-
 
 },{"./ajaxRequest":2}],9:[function(require,module,exports){
 module.exports = function(map, el) {

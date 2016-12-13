@@ -1,4 +1,5 @@
-(function(){
+;(function(){
+
   'use strict'
 
   var map
@@ -33,7 +34,7 @@
     })
 
     // execute side-effects
-    //renderPolygon(map)
+    renderPolygon(map, 'show-all-poly')
     showHomes(map, polygon, markers, results, 'show-homes')
     showPoly('show-poly', 'poly-log')
     logHomes(map, polygon, 'log-homes')

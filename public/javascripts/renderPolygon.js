@@ -5,23 +5,28 @@ var polygons = getRemote('polygons')
 
 var fillColors = [ '#1CB841', '#CA3C3C', '#DF7514', '#42B8DD' ]
 
-// this WILL breaks b/c polygons in DB don't all have ltglng data
-module.exports = function(map){
+// WILL break b/c polygons in DB don't (all) have ltglng data
+module.exports = function(map, el){
 
   var map = map
   var vertices = []
 
-  polygons.forEach(function(polygon){
-    polygon.paths.forEach(function(path){
-      vertices.push({ lat: polygon.path.lat, lng: polygon.path.lng })
-    })
+  var el = document.getElementById(el)
+  el.addEventListener('click', function(e) {
+    e.preventDefault()
 
-    var newPolygon = new google.maps.Polygon({
-      paths: vertices,
-      map: map,
-      strokeColor: '#ff0000',
-      fillColor: '#ff0000',
-      fillOpacity: 0.25
+    polygons.forEach(function(polygon, idx){
+      polygon.paths.forEach(function(path){
+        vertices.push({ lat: path.lat, lng: path.lng })
+      })
+
+      var newPolygon = new google.maps.Polygon({
+        paths: vertices,
+        map: map,
+        strokeColor: fillColors[idx],
+        fillColor: fillColors[idx],
+        fillOpacity: 0.25
+      })
     })
 
   })
