@@ -27,7 +27,6 @@ module.exports = function(map, el){
         fillColor: fillColors[idx],
         fillOpacity: 0.25
       })
-      console.log(vertices)
     })
 
   })
