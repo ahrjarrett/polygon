@@ -7,6 +7,7 @@
   var R = require('ramda')
 
   function initMap() {
+    //var clearMap = require('./clearMap')
     var logPath = require('./logPath')
     var logCoordinates = require('./logCoordinates')
     var logHomes = require('./logHomes')
@@ -33,7 +34,7 @@
       if(currentPath.length < 7) currentPath.push(e.latLng)
     })
 
-    // execute side-effects
+    //clearMap(map)('clear-map')
     renderPolygon(map, 'show-all-poly')
     showHomes(map, polygon, markers, results, 'show-homes')
     showPoly('show-poly', 'poly-log')

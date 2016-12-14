@@ -14,5 +14,5 @@ function clearLog() {
 }
 
 function clearMap() {
-  console.log('clearMap wired up')
+  console.log('clearMap loaded')
 }
