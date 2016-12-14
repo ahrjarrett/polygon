@@ -25,6 +25,21 @@
 
     map = new google.maps.Map(document.getElementById(mapDiv), mapOpts)
 
+    //var testMarker = new google.maps.Marker({
+    //  position: { lat: 39.7758249410587, lng: -104.9732494354248 },
+    //  map: map,
+    //  title: 'test marker'
+    //})
+
+    //var infowindow = new google.maps.InfoWindow({
+    //  content: 'testing infowindow: does this pop up?'
+    //})
+
+    //testMarker.addListener('click', function(){
+    //  infowindow.open(map, testMarker)
+    //})
+
+
     var polyOpts = opts.polyOpts
     var polygon = new google.maps.Polygon(polyOpts)
     polygon.setMap(map)

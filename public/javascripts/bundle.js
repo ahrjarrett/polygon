@@ -9028,6 +9028,21 @@ module.exports = function(map, path, el){
 
     map = new google.maps.Map(document.getElementById(mapDiv), mapOpts)
 
+    //var testMarker = new google.maps.Marker({
+    //  position: { lat: 39.7758249410587, lng: -104.9732494354248 },
+    //  map: map,
+    //  title: 'test marker'
+    //})
+
+    //var infowindow = new google.maps.InfoWindow({
+    //  content: 'testing infowindow: does this pop up?'
+    //})
+
+    //testMarker.addListener('click', function(){
+    //  infowindow.open(map, testMarker)
+    //})
+
+
     var polyOpts = opts.polyOpts
     var polygon = new google.maps.Polygon(polyOpts)
     polygon.setMap(map)
@@ -9086,13 +9101,13 @@ var fillColors = [ '#1CB841', '#CA3C3C', '#DF7514', '#42B8DD' ]
 module.exports = function(map, el){
 
   var map = map
-  var vertices = []
 
   var el = document.getElementById(el)
   el.addEventListener('click', function(e) {
     e.preventDefault()
 
     polygons.forEach(function(polygon, idx){
+      var vertices = []
       polygon.paths.forEach(function(path){
         vertices.push({ lat: path.lat, lng: path.lng })
       })
@@ -9104,6 +9119,7 @@ module.exports = function(map, el){
         fillColor: fillColors[idx],
         fillOpacity: 0.25
       })
+      console.log(vertices)
     })
 
   })
@@ -9126,7 +9142,7 @@ module.exports = function(map, paths, el){
   var el = document.getElementById(el)
   el.addEventListener('click', function(e){
     // for some reason preventDefault() prevents form from hitting DB
-    e.preventDefault()
+    //e.preventDefault()
     var newPoly = new google.maps.Polygon({
       paths: thisPath,
       strokeColor: '#000',

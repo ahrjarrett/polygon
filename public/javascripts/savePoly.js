@@ -4,7 +4,7 @@ module.exports = function(map, paths, el){
   var el = document.getElementById(el)
   el.addEventListener('click', function(e){
     // for some reason preventDefault() prevents form from hitting DB
-    e.preventDefault()
+    //e.preventDefault()
     var newPoly = new google.maps.Polygon({
       paths: thisPath,
       strokeColor: '#000',

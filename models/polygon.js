@@ -5,7 +5,7 @@ var Schema = mongoose.Schema
 
 var PolygonSchema = new Schema({
   name: String,
-  //paths: Array,
+  paths: Array,
   description: String
 })
 

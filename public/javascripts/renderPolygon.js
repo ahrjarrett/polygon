@@ -9,13 +9,13 @@ var fillColors = [ '#1CB841', '#CA3C3C', '#DF7514', '#42B8DD' ]
 module.exports = function(map, el){
 
   var map = map
-  var vertices = []
 
   var el = document.getElementById(el)
   el.addEventListener('click', function(e) {
     e.preventDefault()
 
     polygons.forEach(function(polygon, idx){
+      var vertices = []
       polygon.paths.forEach(function(path){
         vertices.push({ lat: path.lat, lng: path.lng })
       })
@@ -27,6 +27,7 @@ module.exports = function(map, el){
         fillColor: fillColors[idx],
         fillOpacity: 0.25
       })
+      console.log(vertices)
     })
 
   })

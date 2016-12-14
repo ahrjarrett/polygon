@@ -26,7 +26,7 @@ router.post('/save-poly', function(req, res, next){
   })
   new Polygon({
     name: req.body.name,
-    //paths: paths,
+    paths: paths,
     description: req.body.description
   }).
   save(function(err, doc){
