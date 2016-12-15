@@ -14,7 +14,7 @@ router.post('/save-data', function(request, response, next){
   var url = `https://maps.googleapis.com/maps/api/geocode/json?address=${street_address}`
   var latlng
 
-  // be careful no to mix up this structure w/ the home model
+  // be careful not to mix up this structure w/ the home model
   serverReq({ url, json: true }, (err, res, body) => {
     new Home({
       street_address: street_address,
@@ -26,14 +26,14 @@ router.post('/save-data', function(request, response, next){
       }
     }).
     save(function(err, data){
-    var data = res.body.results[0]
-    var lat = data.geometry.location.lat
-    var lng = data.geometry.location.lng
-    var formatted_address = data.formatted_address
+      var data = res.body.results[0]
+      var lat = data.geometry.location.lat
+      var lng = data.geometry.location.lng
+      var formatted_address = data.formatted_address
 
-    //console.log(data)
       if (err) next()
       else return
+
     })
   })
 

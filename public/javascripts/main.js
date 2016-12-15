@@ -25,6 +25,9 @@
 
     map = new google.maps.Map(document.getElementById(mapDiv), mapOpts)
 
+    /* these 3 paragraphs allow infowindows that are clickable even while
+     * overlapping with a rendered polygon
+     */
     //var testMarker = new google.maps.Marker({
     //  position: { lat: 39.7758249410587, lng: -104.9732494354248 },
     //  map: map,
@@ -49,7 +52,6 @@
       if(currentPath.length < 7) currentPath.push(e.latLng)
     })
 
-    //clearMap(map)('clear-map')
     renderPolygon(map, 'show-all-poly')
     showHomes(map, polygon, markers, results, 'show-homes')
     showPoly('show-poly', 'poly-log')
@@ -60,7 +62,7 @@
 
     // order of newPath is important here b/c we need to load just before saving
     var newPath = polygon.getPath()
-    savePoly(map, newPath, 'save-poly')
+    //savePoly(map, newPath, 'save-poly')
     saveHomes(map, 'save-home')
 
   }

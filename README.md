@@ -7,14 +7,8 @@ Click at least twice on the map to create a line, three times or more to create 
 
 Note that the Polygon is draggable and editable; as of now, 'Log Path' and 'Check Against Map' will need to be run again in order to re-compute coordinates. Also note that there is an arbitrary limit on the number of pin-drops the polygon will accept (6).
 
-### Specs:
-* Create a map program where I can draw polygons in and around Denver
-* process real estate data against the map program so I can put each home into its proper polygon (drawn on the map)
-* add some custom columns into the DB based on IF/Then statements or calculations
-* Ability to export the data
-* Future - have a front end interface hit the DB for reporting.
-
 ### Todo:
+- saveHome and savePoly are broken, fix so they persist data to DB again
 - ~~Load home data from database instead of data.json~~
 - ~~Turn each coordinate and address into dynamic link to its raw data~~
 - ~~Add price filter~~

@@ -4,7 +4,7 @@ var express = require('express')
 var mongoose = require('mongoose')
 var request = require('request')
 var router = express.Router()
-var savePoly = require('../public/javascripts/savePoly')
+//var savePoly = require('../public/javascripts/savePoly')
 var Polygon = require('../models/polygon')
 
 router.get('/polygons', function(req, res, next) {
@@ -21,12 +21,15 @@ router.get('/polygons/:id', function(req, res, next) {
 
 // THIS WORKS--now get the innerText of req.body.paths
 router.post('/save-poly', function(req, res, next){
-  mongoose.model('Polygon').find(function(err, polygons) {
-    res.json(polygons)
-  })
+
+  // is this bit of code necessary? i don't think so...
+  //mongoose.model('Polygon').find(function(err, polygons) {
+  //  res.json(polygons)
+  //})
+
   new Polygon({
     name: req.body.name,
-    paths: paths,
+    paths: req.body.paths,
     description: req.body.description
   }).
   save(function(err, doc){
