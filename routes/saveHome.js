@@ -8,7 +8,7 @@ var router = express.Router()
 
 var Home = require('../models/home')
 
-router.post('/save-data', function(request, response, next){
+router.post('/save-home', function(request, response, next){
   var city = 'denver'
   var street_address = encodeUriQuery(request.body.street, true)
   var url = `https://maps.googleapis.com/maps/api/geocode/json?address=${street_address}`
