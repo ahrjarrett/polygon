@@ -18,7 +18,7 @@ router.post('/save-home', function(request, response, next){
   serverReq({ url, json: true }, (err, res, body) => {
     new Home({
       street_address: street_address,
-      formatted_address: data.formatted_address,
+      //formatted_address: data.formatted_address,
       price: request.body.price,
       latlng: {
         lat: lat,

@@ -3,6 +3,7 @@
 var express = require('express')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
+var flash = require('express-flash')
 var fs = require('fs')
 var logger = require('morgan')
 var mongoose = require('mongoose')
@@ -22,12 +23,13 @@ mongoose.connect('mongodb://admin:rootbeer@ds127968.mlab.com:27968/gmaps_polygon
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
 
-app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'node_modules/jquery/dist')))
+app.use(flash())
+app.use(logger('dev'))
 
 app.use('/', index)
 app.use(polyRoutes)
