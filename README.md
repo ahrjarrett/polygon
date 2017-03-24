@@ -17,6 +17,7 @@ Note that the Polygon is draggable and editable; as of now, 'Log Path' and 'Chec
 - ~~Hone Polygram and Home schema, add error handling~~
 - ~~figure out how eventListeners work when layered on Polygons (no rightclick event?)~~
 - ~~Save Polygrams in db for reference later~~
+- ~~fix ajax sync problem (open console for e.message)~~
 - Remove cruft in public/javascripts (unused files, required fns that aren't invoked, etc.)
 - asynchronous req from geocode returns an array that's out of order, causes exceptions
 - POST request: /save-home *make it work at all*
@@ -25,5 +26,4 @@ Note that the Polygon is draggable and editable; as of now, 'Log Path' and 'Chec
 - *OR*: get vertices dynamically, or from a DB query
 - Bug: Clear log doesn't empty results array, which means it keeps accumulating state
 - Refactor filtering logic for easier reuse later
-- fix ajax sync problem (open console for e.message)
 - add one more form to right interface (toggle showPolygon(s))?

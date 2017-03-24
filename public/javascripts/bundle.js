@@ -8837,7 +8837,7 @@ module.exports = function (urlCall) {
     type: 'GET',
     url: urlCall,
     dataType: 'json',
-    async: false
+    async: true
   }).responseJSON
 }
 
