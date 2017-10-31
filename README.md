@@ -1,6 +1,6 @@
 # Real Estate Polygon App
 
-Demo: [Polygon Demo](https://young-sands-13574.herokuapp.com/)
+Demo: [Polygon Demo](https://polygonpolygon.herokuapp.com/)
 
 ### Instructions:
 Click at least twice on the map to create a line, three times or more to create a polygon. On the right are operations you can perform, including a log of the coordinates of the line/polygon and a function that will check a JSON array full of coordinates and return which, if any, are contained inside the polygon and fall within the designated price range (click 'See JSON Data' to see all coordinates).
