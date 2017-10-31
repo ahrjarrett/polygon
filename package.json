@@ -1,8 +1,7 @@
 {
   "name": "google-maps-polygon",
-  "version": "0.0.0",
+  "version": "0.0.6",
   "description": "a map program where I can draw polygons in and around Denver",
-  "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
@@ -11,10 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahrjarrett/google-maps-polygon.git"
+    "url": "git+https://github.com/ahrjarrett/polygon.git"
   },
   "author": "Andrew Jarrett",
   "dependencies": {
+    "axios": "^0.17.0",
     "babel": "^5.8.21",
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",

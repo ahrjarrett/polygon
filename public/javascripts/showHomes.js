@@ -1,8 +1,11 @@
 'use strict'
 
 var R = require('ramda')
-var getRemote = require('./ajaxRequest')
-var homes = getRemote('homes')
+
+// set ajax response to window.homes:
+require('./ajax')('homes').then(function(response) {
+  window.homes = response.data
+})
 
 module.exports = function(map, polygon, markers, results, el){
   var showHomes = document.getElementById(el)
@@ -16,6 +19,7 @@ module.exports = function(map, polygon, markers, results, el){
         markers[i].setMap(mapToSet)
       }
     }
+
     var clearMarkers = function(){
       setMapOnAll(null)
     }
@@ -30,7 +34,7 @@ module.exports = function(map, polygon, markers, results, el){
       })
     }
 
-    var getHomes = R.map(function(home){
+    var getHomes = R.map(function(home) {
       var datum = new google.maps.LatLng(home.latlng)
       if(home.price >= minPrice && home.price <= maxPrice){
         if(google.maps.geometry.poly.containsLocation(datum, polygon)) {
@@ -41,7 +45,7 @@ module.exports = function(map, polygon, markers, results, el){
     })
 
     deleteMarkers()
-    getHomes(homes)
+    getHomes(window.homes)
     setMapOnAll(map)
 
   })

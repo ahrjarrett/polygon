@@ -22,4 +22,3 @@ router.get('/homes/:id', function(req, res, next){
 })
 
 module.exports = router
-

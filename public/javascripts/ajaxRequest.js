@@ -6,4 +6,3 @@ module.exports = function (urlCall) {
     async: true
   }).responseJSON
 }
-

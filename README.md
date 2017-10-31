@@ -7,6 +7,20 @@ Click at least twice on the map to create a line, three times or more to create 
 
 Note that the Polygon is draggable and editable; as of now, 'Log Path' and 'Check Against Map' will need to be run again in order to re-compute coordinates. Also note that there is an arbitrary limit on the number of pin-drops the polygon will accept (6).
 
+To start hacking locally:
+
+```
+$ git clone https://github.com/ahrjarrett/polygon
+$ cd polygon
+$ npm i -g watchify nodemon
+$ npm run dev
+# in a separate terminal window:
+$ npm run watch
+```
+
+**Notes:**
+- 10/30/17: ajax calls stopped working (not the mongo queries, as i thought at first), so as a temporary fix i swapped jquery out for axios and attached the promise resolution to window.homes. currently not working for polygon, requiring a more substantial fix/code review.
+
 ### Todo:
 - saveHome and savePoly are broken, fix so they persist data to DB again
 - ~~Load home data from database instead of data.json~~

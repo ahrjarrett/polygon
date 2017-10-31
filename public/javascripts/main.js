@@ -5,6 +5,7 @@
   var map
   var markers = []
   var R = require('ramda')
+  var ajax = require('./ajax')
 
   function initMap() {
     //var clearMap = require('./clearMap')
@@ -66,6 +67,9 @@
     saveHomes(map, 'save-home')
 
   }
+
   window.onload = initMap
+
+
 
 }())
